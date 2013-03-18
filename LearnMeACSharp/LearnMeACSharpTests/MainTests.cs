@@ -7,7 +7,7 @@ namespace LearnMeACSharpTests
     public class MainTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void StackTest()
         {
             Stack<int> s = new Stack<int>();
             Assert.AreEqual(s.Count, 0);
@@ -25,6 +25,19 @@ namespace LearnMeACSharpTests
             var testString = "hi there";
             strStck.Push(testString);
             Assert.AreEqual(testString, strStck.Pop());
+
+            Stack<Object> bigStack = new Stack<Object>();
+            for (int i = 0; i < 10000; i++)
+            {
+                bigStack.Push(new Object());
+            }
+            Assert.AreEqual(10000, bigStack.Count);
+        }
+        [TestMethod]
+        public void FunctionTest()
+        {
+            int[] t = {1,2,3};
+            Assert.AreEqual(FunctionMagic.AddOneToAllAndSum(t), 9);
         }
     }
 }

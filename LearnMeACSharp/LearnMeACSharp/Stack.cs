@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LearnMeACSharp
 {
-    public class Stack<T>
+    public class ListStack<T>
     {
        List<T> list = new List<T>();
 
@@ -23,4 +23,32 @@ namespace LearnMeACSharp
        }
                     
     }
+    
+    
+    
+    
+    public class Stack<T>
+    {
+        int position = 0;
+        T[] array = new T[10];
+        public void Push(T x)
+        {
+            array[position] = x;
+            position++;
+        }
+        public T Pop()
+        {
+            T popped = array[position];
+            position--;
+            return popped;
+
+        }
+        public int Count { get {return position+1;} }
+            
+
+    }
+
+
+
+
 }

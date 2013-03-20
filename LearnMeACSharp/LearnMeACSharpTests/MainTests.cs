@@ -36,8 +36,15 @@ namespace LearnMeACSharpTests
         [TestMethod]
         public void FunctionTest()
         {
-            int[] t = {1,2,3};
-            Assert.AreEqual(FunctionMagic.AddOneToAllAndSum(t), 9);
+            int[] t = {1,2,3,4};
+            Assert.AreEqual(FunctionMagic.AddOneToAllAndSum(t), 14);   
         }
+        public void DuplicateUniqueTest()
+        {
+            int[] a = { 1, 2, 3 };
+            int[] b = { 2, 3, 4 };
+            Assert.AreEqual(new int[]{2,2,3,3}, FunctionMagic.DuplicateUniques(a,b));   
+        }
+
     }
 }

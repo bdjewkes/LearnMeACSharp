@@ -8,7 +8,8 @@ namespace LearnMeACSharp
     public static class FunctionMagic
     {
         public static int AddOneToAllAndSum(IEnumerable<int> input){
-            throw new System.NotImplementedException();
+            int sum = input.Select(x => 1+x).Sum();
+            return sum;
         }
         //public static Dictionary<T, R> CouplePairs<T, R>(T aSet, R bSet)
         //{

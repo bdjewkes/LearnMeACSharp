@@ -33,13 +33,16 @@ namespace LearnMeACSharp
         T[] array = new T[10];
         public void Push(T x)
         {
+            if (array.Length>=position){int pos2=position*2; 
+                Array.Resize(ref array, position*2);
+            }
             array[position] = x;
             position++;
         }
         public T Pop()
         {
-            T popped = array[position];
             position--;
+            T popped = array[position];
             return popped;
 
         }

@@ -18,7 +18,11 @@ namespace LearnMeACSharp
             //You probably also need ToArray to satisfy the signature
             throw new System.NotImplementedException();
         }
-            
+        public static Func<int, int> MultiplyBy(int a){
+            // Lambda syntax (input parameters) => expression
+            // Or http://msdn.microsoft.com/en-us/library/bb397687.aspx
+            throw new System.NotImplementedException();
+        }
     }
     
 }

@@ -43,8 +43,19 @@ namespace LearnMeACSharpTests
         {
             int[] a = { 1, 2, 3 };
             int[] b = { 2, 3, 4 };
-            Assert.AreEqual(new int[]{2,2,3,3}, FunctionMagic.DuplicateUniques(a,b));   
-        }
+            Assert.AreEqual(new int[]{1,1,4,4}, FunctionMagic.DuplicateUniques(a,b));
 
+            int[] c = { 1, 2, 3, 4, 5, 7, 8, 10 };
+            int[] d = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            Assert.AreEqual(new int[] {6, 6, 9, 9 }, FunctionMagic.DuplicateUniques(a, b));   
+ 
+        }
+        public void MultiplyByTest()
+        {
+            Assert.AreEqual(1,FunctionMagic.MultiplyBy(1)(1));
+            Assert.AreEqual(4, FunctionMagic.MultiplyBy(2)(2));
+            Assert.AreEqual(15, FunctionMagic.MultiplyBy(5)(3));
+
+        }
     }
 }

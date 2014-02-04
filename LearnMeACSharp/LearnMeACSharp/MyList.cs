@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace LearnMeACSharp
 {
-    public class MyList<T> : IList<T>
+    public class MyList<T> : System.Collections.Generic.IList<T>
     {
-        public List<int> cheatz;
         public int IndexOf(T item)
         {
             throw new NotImplementedException();

@@ -1,11 +1,83 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LearnMeACSharp;
+using System.Linq;
 namespace LearnMeACSharpTests
 {
     [TestClass]
     public class MainTests
     {
+        [TestMethod]
+        public void ListTest()
+        {
+            DateTime start = DateTime.Now;
+            for (int i = 0; i < 100; i++)
+            {
+                ListRNDTest();
+            }
+            Assert.IsTrue((DateTime.Now - start).Duration() < TimeSpan.FromMilliseconds(1000));
+        }
+        public void ListRNDTest()
+        {
+            var controlList = new System.Collections.Generic.List<int>();
+            var testList = new MyList<int>();
+
+            var r = new System.Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                var next = r.Next();
+                controlList.Add(next);
+                testList.Add(next);
+                Assert.AreEqual(controlList.Count, testList.Count);
+            }
+            for (int i = 0; i < 1000; i++)
+            {
+                Assert.IsTrue(testList.IndexOf(controlList[i]) == i);
+            }
+            for (int i = 0; i < controlList.Count; i++)
+            {
+                if (r.Next() < int.MaxValue / 2)
+                {
+                    testList.RemoveAt(i);
+                    controlList.RemoveAt(i);
+                }
+                else
+                {
+                    var newItem = r.Next();
+                    testList.Insert(i, newItem);
+                    controlList.Insert(i, newItem);
+                }
+            }
+            Assert.AreEqual(controlList.Count, testList.Count);
+
+
+            foreach (var itm in controlList){
+                Assert.IsTrue(testList.Contains(itm));    
+            }
+            for (int i = 0; i < controlList.Count / 2; i++ )
+            {
+                var e = controlList[i];
+                controlList.Remove(e);
+                testList.Remove(e);
+            }
+            int[] controllarray = new int[controlList.Count+1];
+            int[] testArray = new int[testList.Count+1];
+            controllarray[0] = r.Next();
+            testArray[0] = controllarray[0];
+            controlList.CopyTo(controllarray, 1);
+            testList.CopyTo(testArray, 1);
+
+            var q = from a in testArray
+                    join b in controllarray on a equals b
+                    select a;
+
+
+            Assert.IsTrue(testArray.Length == controllarray.Length && q.Count() == controllarray.Length);
+            controlList.Clear();
+            testList.Clear();
+            Assert.AreEqual(controlList.Count,testList.Count);
+        }
+
         [TestMethod]
         public void StackTest()
         {

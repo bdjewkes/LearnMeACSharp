@@ -69,7 +69,7 @@ namespace LearnMeACSharp
             throw new NotImplementedException();
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
         }

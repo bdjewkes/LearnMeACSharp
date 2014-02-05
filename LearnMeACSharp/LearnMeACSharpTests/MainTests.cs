@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define LIVE
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LearnMeACSharp;
 using System.Linq;
@@ -8,8 +10,87 @@ namespace LearnMeACSharpTests
     public class MainTests
     {
         [TestMethod]
+        public void AddTest()
+        {
+            var controlList = new System.Collections.Generic.List<int>();
+            System.Collections.Generic.IList<int> testList =
+#if LIVE
+            new MyList<int>();
+#else
+            new System.Collections.Generic.List<int>();
+#endif
+            var r = new System.Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                var next = r.Next();
+                controlList.Add(next);
+                testList.Add(next);
+                Assert.AreEqual(controlList.Count, testList.Count);
+            }
+
+        }
+
+        [TestMethod]
+        public void AddIndexAndValueCheckTest()
+        {
+            System.Collections.Generic.IList<int> testList =
+#if LIVE
+            new MyList<int>();
+#else
+            new System.Collections.Generic.List<int>();
+#endif
+            var controlList = new System.Collections.Generic.List<int>();
+            var r = new System.Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                var next = r.Next();
+                controlList.Add(next);
+                testList.Add(next);
+                Assert.AreEqual(controlList.Count, testList.Count);
+            }
+            for (int i = 0; i < 1000; i++)
+            {
+                Assert.IsTrue(testList.IndexOf(controlList[i]) == i);
+            }
+
+        }
+        [TestMethod]
+        public void AddAndRemoveAtTest()
+        {
+            var controlList = new System.Collections.Generic.List<int>();
+            System.Collections.Generic.IList<int> testList =
+#if LIVE
+            new MyList<int>();
+#else
+            new System.Collections.Generic.List<int>();
+#endif
+            var r = new System.Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                var next = r.Next();
+                controlList.Add(next);
+                testList.Add(next);
+                Assert.AreEqual(controlList.Count, testList.Count);
+            }
+            for (int i = 0; i < controlList.Count; i++)
+            {
+                if (r.Next() < int.MaxValue / 2)
+                {
+                    testList.RemoveAt(i);
+                    controlList.RemoveAt(i);
+                }
+            }
+            Assert.AreEqual(testList.Count, controlList.Count);
+            for (int i = 0; i < controlList.Count; i++)
+            {
+                Assert.IsTrue(testList.IndexOf(controlList[i]) == i);
+            }
+
+        }
+        [TestMethod]
         public void ListTest()
         {
+            ListRNDTest();
             DateTime start = DateTime.Now;
             for (int i = 0; i < 100; i++)
             {
@@ -19,9 +100,13 @@ namespace LearnMeACSharpTests
         }
         public void ListRNDTest()
         {
+            System.Collections.Generic.IList<int> testList =
+#if LIVE
+            new MyList<int>();
+#else
+            new System.Collections.Generic.List<int>();
+#endif
             var controlList = new System.Collections.Generic.List<int>();
-            var testList = new MyList<int>();
-
             var r = new System.Random();
             for (int i = 0; i < 1000; i++)
             {

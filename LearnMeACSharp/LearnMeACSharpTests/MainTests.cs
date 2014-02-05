@@ -7,6 +7,19 @@ namespace LearnMeACSharpTests
     [TestClass]
     public class MainTests
     {
+
+        [TestMethod]
+        public void AddTest()
+        {
+            var controlList = new System.Collections.Generic.List<int>();
+            var testList = new MyList<int>();
+            controlList.Add(1);
+            testList.Add(1);
+            Assert.AreEqual(controlList.Count, testList.Count);
+
+        }
+
+
         [TestMethod]
         public void ListTest()
         {
@@ -77,6 +90,7 @@ namespace LearnMeACSharpTests
             testList.Clear();
             Assert.AreEqual(controlList.Count,testList.Count);
         }
+    
 
         [TestMethod]
         public void StackTest()

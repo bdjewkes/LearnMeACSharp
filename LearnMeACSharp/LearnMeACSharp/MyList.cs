@@ -1,60 +1,142 @@
 ﻿using System;
 using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+
 
 namespace LearnMeACSharp
 {
-    public class MyList<T> : System.Collections.Generic.IList<T>
+    public class MyList<T>// : System.Collections.Generic.IList<T>
     {
+        public class Node
+        {
+            public Node next;
+            public T value;
+            public Node(T v)
+            {
+                this.value = v;
+            }
+            public Node(Node n, T v)
+            {
+                this.next = n;
+                this.value = v;
+            }
+        }
+        public Node firstnode;
+
+        public MyList() // default constructor
+        {
+            firstnode = null;
+        }
+        
+           
+        public void Add(T item)
+        {
+            if (firstnode == null) firstnode = new Node(item);
+            else
+            {
+                Node current = firstnode;
+                while (current.next != null) current = current.next;
+                current.next = new Node(item);
+            }
+        }
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            Node current = firstnode;
+            int index = 0;
+            while (current.next != null)
+            {
+                if ((object)current.value == (object)item) return index;
+                else
+                {
+                    current = current.next;
+                    index++;
+                }
+
+            }
+            return -1;
         }
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            Node current = firstnode;
+            while (i < index) { current = current.next; i++; }
+            current.next = new Node(current.next, item);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            Node current = firstnode;
+            while (i < index - 1) { current = current.next; i++; }
+            Node removed = current.next;
+            current.next = removed.next;
+            removed = null;
+
         }
 
         public T this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                Node current = firstnode;
+                int i=0;
+                while (i < index) { current = current.next; i++; }
+                return current.value;
+
             }
             set
             {
-                throw new NotImplementedException();
+                Node current = firstnode;
+                int i = 0;
+                while (i < index) { current = current.next; i++; }
+                current.value = value;
             }
         }
 
-        public void Add(T item)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void Clear()
         {
-            throw new NotImplementedException();
+            this.firstnode = null;
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            Node current = firstnode;
+            while (current.next != null)
+            {
+                if ((object)current.value == (object)item) return true;
+                else
+                {
+                    current = current.next;
+                }
+
+            }
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Node current = firstnode;
+            int index = 0;
+            while (current.next != null)
+            {
+                array[index+arrayIndex]=current.value;
+            }
         }
 
         public int Count
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                Node current = firstnode;
+                int index = 0;
+                while (current.next != null) index++;
+                return index + 1;
+     
+            }
         }
 
         public bool IsReadOnly
@@ -68,15 +150,43 @@ namespace LearnMeACSharp
         {
             throw new NotImplementedException();
         }
-
-        public IEnumerator<T> GetEnumerator()
+  /*      public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new MyListEnumerator<T>(this);
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return (IEnumerator)new MyListEnumerator<T>(this);
         }
+
+        private class MyListEnumerator<T> : IEnumerator<T>
+        {
+            private MyList<T> t;
+            private int position = -1;
+            private Node currentnode;
+            public MyListEnumerator(MyList<T> t)
+            {
+                this.t = t;
+                currentnode = t.firstnode;
+            }
+            public bool MoveNext()
+            {
+                if (currentnode == null)
+                    return false;
+                else
+                {
+                    position++;
+                    currentnode = currentnode.next;
+                    return true;
+                }
+            }
+            public T Current
+            {
+                get
+                { return currentnode }
+            }
+            
+        }    */
     }
 }

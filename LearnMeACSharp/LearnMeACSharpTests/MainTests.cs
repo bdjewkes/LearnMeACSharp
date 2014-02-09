@@ -145,6 +145,8 @@ namespace LearnMeACSharpTests
                 controlList.Remove(e);
                 testList.Remove(e);
             }
+            Assert.AreEqual(controlList.Count, testList.Count);
+
             int[] controllarray = new int[controlList.Count+1];
             int[] testArray = new int[testList.Count+1];
             controllarray[0] = r.Next();

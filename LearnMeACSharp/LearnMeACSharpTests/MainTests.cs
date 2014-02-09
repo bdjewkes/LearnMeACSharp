@@ -96,7 +96,7 @@ namespace LearnMeACSharpTests
             {
                 ListRNDTest();
             }
-            Assert.IsTrue((DateTime.Now - start).Duration() < TimeSpan.FromMilliseconds(1000));
+            Assert.IsTrue((DateTime.Now - start).Duration() < TimeSpan.FromMilliseconds(3000));
         }
         public void ListRNDTest()
         {
